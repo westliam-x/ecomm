@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard |  Queen's Plastic Packaging</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="admin-container">
+        <div class="ad-nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span  class="icon"><i class="fa-solid fa-sparkles"></i></span>
+                        <span  class="title  b-name"><i class="fa-solid fa-house"></i>Queen's Plastic Packaging</span>
+                        <div class="line"></div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <!-- <span  class="icons"><i class="fa-solid fa-sparkles"></i></span> -->
+                        <span  class="title"><i class="fa-solid fa-house"></i>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span  class="title"><i class="fa-solid fa-house"></i>Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <!-- <span  class="icon"><i class="fa-solid fa-sparkles"></i></span> -->
+                        <span  class="title"><i class="fa-solid fa-house"></i>Messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <!-- <span  class="icon"><i class="fa-solid fa-sparkles"></i></span> -->
+                        <span  class="title"><i class="fa-solid fa-house"></i>Sign  Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-admin">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <div class="search">
+                    <label for="">
+                        <input type="text"  placeholder="Search Here">
+                    </label>
+                </div>
+                <div class="user">
+                    <img src="images/gold.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- cards -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">1505</div>
+                        <div class="cardName">Monthly Visits</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">75</div>
+                        <div class="cardName">Sales</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">₦300k</div>
+                        <div class="cardName">Earnings</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <div class="numbers">20</div>
+                        <div class="cardName">Customers</div>
+                    </div>
+                    <div class="iconBx">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- order  details -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Recent  Orders</h2>
+                        <a href="#" class="btn">View  All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Payment</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status pending">Pending</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status delivered">Delivered</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status pending">Pending</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status return">Returned</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status progress">In Progress</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status delivered">Delivered</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status delivered">Delivered</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>100ml Jar</td>
+                                <td>#5000</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="status progress">In Progress</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- customers -->
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Recent  Customers</h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    <img src="images/bottle.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h4>Chinanza  </h4>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+                // Menu-toggle
+        let toggle  = document.querySelector('.toggle');
+        let navigation  = document.querySelector('.ad-nav');
+        let mainAdmin  = document.querySelector('.main-admin')
+       
+        toggle.onclick = function(){
+            navigation.classList.toggle('active')
+            mainAdmin.classList.toggle('active')
+        }
+        // let list=document.querySelectorAll(".ad-nav li")
+        // function  activeLink(){
+        //     list.forEach((item)=>
+        //     item.classList.remove('hovered'))
+        //     this.classList.add('hovered')
+        // }
+        // list.forEach((item)=>
+        // item.addEventListener('mouseover',activeLink))
+    </script>
+</body>
+</html>
