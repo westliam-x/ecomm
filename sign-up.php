@@ -136,7 +136,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="text" placeholder="Phone Number" name="phone_number" id="">
                             </div>
                             <label for="picture">Profile Picture:</label>
-                            <input type="file" name="image" id="image">
+                            <input type="file" name="image" id="image" directory="images/">
+
                             <div class="gender">
                                 Gender: <input type="radio" name="Gender" value="Male" id="">Male
                                 <input type="radio" name="Gender" value="Female" id="">Female
