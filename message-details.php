@@ -6,6 +6,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
     header("location: log-in-admin.php");
     exit;
 }
+$id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +87,31 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                     <img src="images/gold.jpg" alt="">
                 </div>
             </div>
+            <div class="info-container">
+                <?php
+                $sql = "SELECT * FROM messages WHERE id = '$id'";
+                $result = mysqli_query($mysqli, $sql);
+                $message = mysqli_fetch_assoc($result);
+                $id = $message['id'];
+                $name = $message['Name'];
+                $email = $message['email'];
+                $subject = $message['subject'];
+                $message = $message['message'];
+                ?>
+                <h1 class="order-details-title">Message Details</h1>
+                <div class="order-details">
+                    <p class="order-details-label">Message ID:</p>
+                    <p class="order-details-value"><?php echo $id; ?></p>
+                    <p class="order-details-label">Customer Name:</p>
+                    <p class="order-details-value"><?php echo $name ?></p>
+                    <p class="order-details-label">Customer Email:</p>
+                    <p class="order-details-value"><?php echo $email; ?></p>
+                    <p class="order-details-label">Message Subject:</p>
+                    <p class="order-details-value"><?php echo $subject; ?></p>
+                </div>
+            </div>
+
+
 
 
 
@@ -93,59 +119,17 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
             <div class="info-container">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Orders</h2>
+                        <h2>Message</h2>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Customer Name</td>
-                                <td>Phone Number</td>
-                                <td>Refrence</td>
-                                <td>Email</td>
-                                <td>Amount</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Loop through the products and display each one
 
-                            $sql = "SELECT reference,MAX(customer_name) AS customer_name,MAX(customer_phone) AS customer_phone,MAX(customer_email) AS customer_email, MAX(product_price) AS product_price, MAX(order_status) AS order_status
-                        FROM 
-                            orders 
-                        GROUP BY 
-                            reference
-                        LIMIT 7";
-                            $result = mysqli_query($mysqli, $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($order = mysqli_fetch_assoc($result)) {
-                                    $refrence = $order['reference'];
-                                    $name = $order['customer_name'];
-                                    $amount = $order['product_price'];
-                                    $status = $order['order_status'];
-                                    $number = $order['customer_phone'];
-                                    $email = $order['customer_email'];
-                            ?>
-                                    <tr>
-                                        <td><?php echo $name; ?></td>
-                                        <td><?php echo $number; ?></td>
-                                        <td><a href="order-details.php?reference=<?php echo $refrence; ?>"><?php echo $refrence; ?></a></td>
-                                        <td><?php echo $email ?></td>
-                                        <td><?php echo $amount ?></td>
-                                        <td>
-                                            <span class="status <?php echo $status ?>"><?php echo $status ?></span>
-                                        </td>
+                    <?php
+                    $sql = "SELECT * FROM messages WHERE id = '$id'";
+                    $result = mysqli_query($mysqli, $sql);
+                    $mess = mysqli_fetch_assoc($result);
+                    $message = $mess['message'];
+                    ?>
+                    <p> <?php echo $message ?> </p>
 
-                                    </tr>
-                            <?php
-                                }
-                            } else {
-                                echo "No products found";
-                            }
-                            // Close the connection
-                            ?>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
@@ -177,6 +161,25 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
         margin: 20px;
         padding: 20px;
         border: 1px solid #ddd;
+    }
+
+    .order-details {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-row-gap: 5px;
+    }
+
+    .order-details-title {
+        margin-top: 0;
+    }
+
+    .order-details-label {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .order-details-value {
+        margin: 0;
     }
 </style>
 

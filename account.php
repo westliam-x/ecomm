@@ -59,9 +59,9 @@ if (!isset($_SESSION['cart'])) {
             </div>
         </div>
         <?php
-
-        $Email = $_SESSION["Email"];
-        $sql = "SELECT * FROM user WHERE Email = '$Email'";
+        $id = $_SESSION["id"];
+        // $Email = $_SESSION["Email"];
+        $sql = "SELECT * FROM user WHERE id = '$id'";
         $result = mysqli_query($mysqli, $sql);
         $user = mysqli_fetch_assoc($result);
         if (mysqli_num_rows($result) > 0) {
@@ -94,7 +94,7 @@ if (!isset($_SESSION['cart'])) {
                         </h2>
                         <div class="infos">
                             <div class="info">
-                                Email: <?php echo $Email; ?>
+                                Email: <?php echo $email; ?>
                             </div>
                             <div class="info">
                                 Phone Number: <?php echo $phone ?>

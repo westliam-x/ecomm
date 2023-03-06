@@ -13,95 +13,23 @@ $Total = isset($_SESSION['cart_total']) ? $_SESSION['cart_total'] : 0;
 
 <head>
 	<title>Confirm Order</title>
-	<style>
-		body {
-			background-color: #1C1C1C;
-			color: #EAEAEA;
-			font-family: Arial, sans-serif;
-		}
-
-		h1 {
-			color: gold;
-			text-align: center;
-			margin-top: 50px;
-		}
-
-		p {
-			margin-bottom: 20px;
-		}
-
-		a {
-			color: gold;
-			text-decoration: none;
-		}
-
-		a:hover {
-			text-decoration: underline;
-		}
-
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th,
-		td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #EAEAEA;
-		}
-
-		th {
-			background-color: black;
-			color: gold;
-		}
-
-		tr:hover {
-			background-color: #333333;
-		}
-
-		form {
-			background-color: #3B3B3B;
-			color: white;
-			width: 500px;
-			margin: 0 auto;
-			padding: 20px;
-			border-radius: 10px;
-		}
-
-		label {
-			display: block;
-			margin-bottom: 10px;
-		}
-
-		input[type="text"],
-		input[type="email"],
-		textarea {
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 20px;
-			border: none;
-			border-radius: 5px;
-			font-size: 16px;
-			background-color: #1C1C1C;
-			color: #EAEAEA;
-		}
-
-		input[type="submit"] {
-			background-color: gold;
-			color: black;
-			border: none;
-			border-radius: 5px;
-			padding: 10px 20px;
-			font-size: 16px;
-			cursor: pointer;
-		}
-	</style>
 </head>
 
 <body>
 	<h1>Confirm Order</h1>
 	<form method="POST" action="confirm.php">
+
+		<input type="text" name="name" id="name" placeholder="Insert your full name" required><br>
+
+		<input type="text" name="phone" id="phone" placeholder="insert your phone number" required><br>
+
+		<input type="email" placeholder="insert your email address" name="email" id="email"><br>
+
+		<input type="text" name="address" placeholder="insert your delivery address" id="address"><br>
+
+		<input type="text" placeholder="Insert Your Contry" name="country" value="United Kingdom" id="country" disabled><br>
+
+		<input type="text" id="total_price" name="total_price" value="<?php echo $Total; ?>" disabled>
 		<table>
 			<thead>
 				<tr>
@@ -164,6 +92,7 @@ $Total = isset($_SESSION['cart_total']) ? $_SESSION['cart_total'] : 0;
 
 		</table>
 
+
 		<a href="cart.php" class="btn"> Back</a>
 		<button type="submit" class="btn" name="Confirm_order">Confirm</button>
 		<!-- <a href="clear_cart.php" class="btn"> Clear Cart</a>
@@ -172,3 +101,138 @@ $Total = isset($_SESSION['cart_total']) ? $_SESSION['cart_total'] : 0;
 </body>
 
 </html>
+<style>
+	body {
+		background-color: #fff;
+		color: black;
+		font-family: Arial, sans-serif;
+	}
+
+	h1 {
+		color: #d4af37;
+		text-align: center;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin-top: 50px;
+	}
+
+	form {
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	input[type="text"],
+	input[type="email"] {
+		padding: 10px;
+		border-radius: 5px;
+		border: none;
+		margin-bottom: 10px;
+		width: 300px;
+	}
+
+	input[type="text"]:focus,
+	input[type="email"]:focus {
+		outline: none;
+		box-shadow: 0px 0px 5px #d4af37;
+	}
+
+	input[type="text"]::placeholder,
+	input[type="email"]::placeholder {
+		color: #808080;
+		font-style: italic;
+	}
+
+	input[type="text"][disabled],
+	input[type="email"][disabled] {
+		background-color: #d3d3d3;
+	}
+
+	input[type="submit"] {
+		background-color: #d4af37;
+		color: #fff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-top: 20px;
+		transition: all 0.3s ease;
+	}
+
+	input[type="submit"]:hover {
+		background-color: #fff;
+		color: #d4af37;
+		border: 1px solid #d4af37;
+	}
+
+	table {
+		margin-top: 50px;
+		border-collapse: collapse;
+		width: 80%;
+		margin: 50px auto;
+	}
+
+	th {
+		background-color: #d4af37;
+		color: #fff;
+		font-weight: bold;
+		padding: 10px;
+		text-align: left;
+	}
+
+	td {
+		padding: 10px;
+	}
+
+	tbody tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	tbody tr:hover {
+		background-color: #ddd;
+	}
+
+	.fa-solid.fa-trash {
+		color: #d4af37;
+		font-size: 1.2rem;
+	}
+
+	.btn {
+		background-color: #d4af37;
+		color: #fff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin: 20px 10px;
+		text-align: center;
+		display: inline;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.btn:hover {
+		background-color: #fff;
+		color: #d4af37;
+		border: 1px solid #d4af37;
+	}
+
+	@media screen and (max-width: 768px) {
+
+		input[type="text"],
+		input[type="email"] {
+			width: 100%;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		th:nth-child(3),
+		td:nth-child(3) {
+			display: none;
+		}
+	}
+</style>

@@ -6,6 +6,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
     header("location: log-in-admin.php");
     exit;
 }
+$reference = $_GET['reference'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +87,36 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                     <img src="images/gold.jpg" alt="">
                 </div>
             </div>
+            <div class="info-container">
+                <?php
+                $sql = "SELECT * FROM orders WHERE reference = '$reference'";
+                $result = mysqli_query($mysqli, $sql);
+                $order = mysqli_fetch_assoc($result);
+                $refrence = $order['reference'];
+                $name = $order['customer_name'];
+                $amount = $order['product_price'];
+                $status = $order['order_status'];
+                $number = $order['customer_phone'];
+                $email = $order['customer_email'];
+                ?>
+                <h1 class="order-details-title">Order Details</h1>
+                <div class="order-details">
+                    <p class="order-details-label">Payment Reference:</p>
+                    <p class="order-details-value"><?php echo $reference; ?></p>
+                    <p class="order-details-label">Customer Name:</p>
+                    <p class="order-details-value"><?php echo $name ?></p>
+                    <p class="order-details-label">Customer Email:</p>
+                    <p class="order-details-value"><?php echo $email; ?></p>
+                    <p class="order-details-label">Customer Phone number:</p>
+                    <p class="order-details-value"><?php echo $number; ?></p>
+                    <p class="order-details-label">Amount Paid:</p>
+                    <p class="order-details-value"><?php echo '₦' . number_format($amount, 2); ?></p>
+                    <p class="order-details-label">Status of Order:</p>
+                    <p class="order-details-value"><?php echo $status; ?></p>
+                </div>
+            </div>
+
+
 
 
 
@@ -93,49 +124,32 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
             <div class="info-container">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Orders</h2>
+                        <h2>Products Bought</h2>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <td>Customer Name</td>
-                                <td>Phone Number</td>
-                                <td>Refrence</td>
-                                <td>Email</td>
-                                <td>Amount</td>
-                                <td>Status</td>
+                                <td>Product Name</td>
+                                <td>Quantity</td>
+                                <td>Price</td>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            // Loop through the products and display each one
 
-                            $sql = "SELECT reference,MAX(customer_name) AS customer_name,MAX(customer_phone) AS customer_phone,MAX(customer_email) AS customer_email, MAX(product_price) AS product_price, MAX(order_status) AS order_status
-                        FROM 
-                            orders 
-                        GROUP BY 
-                            reference
-                        LIMIT 7";
+
+                            $sql = "SELECT * FROM orders WHERE reference = '$reference'";
                             $result = mysqli_query($mysqli, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($order = mysqli_fetch_assoc($result)) {
-                                    $refrence = $order['reference'];
-                                    $name = $order['customer_name'];
-                                    $amount = $order['product_price'];
-                                    $status = $order['order_status'];
-                                    $number = $order['customer_phone'];
-                                    $email = $order['customer_email'];
+                                    $product_name = $order['product_name'];
+                                    $price = $order['price'];
+                                    $quantity = $order['quantity'];
                             ?>
                                     <tr>
-                                        <td><?php echo $name; ?></td>
-                                        <td><?php echo $number; ?></td>
-                                        <td><a href="order-details.php?reference=<?php echo $refrence; ?>"><?php echo $refrence; ?></a></td>
-                                        <td><?php echo $email ?></td>
-                                        <td><?php echo $amount ?></td>
-                                        <td>
-                                            <span class="status <?php echo $status ?>"><?php echo $status ?></span>
-                                        </td>
-
+                                        <td><?php echo $product_name; ?></td>
+                                        <td><?php echo $quantity; ?></td>
+                                        <td><?php echo $price; ?></td>
                                     </tr>
                             <?php
                                 }
@@ -177,6 +191,25 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
         margin: 20px;
         padding: 20px;
         border: 1px solid #ddd;
+    }
+
+    .order-details {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-row-gap: 5px;
+    }
+
+    .order-details-title {
+        margin-top: 0;
+    }
+
+    .order-details-label {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .order-details-value {
+        margin: 0;
     }
 </style>
 

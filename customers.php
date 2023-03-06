@@ -14,7 +14,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer | Queen's Plastic Packaging</title>
+    <title>Admin Dashboard | Queen's Plastic Packaging</title>
     <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/style2.css">
@@ -62,7 +62,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="add-products.php">
                         <!-- <span  class="icon"><i class="fa-solid fa-sparkles"></i></span> -->
                         <span class="title"><i class="fa-solid fa-house"></i>Add Products</span>
                     </a>
@@ -90,8 +90,8 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
 
 
             <!-- order  details -->
-            <div class="details">
-                <div class="recentOrders recentCustomers">
+            <div class=".info-container">
+                <div class="recentOrders ">
                     <div class="cardHeader">
                         <h2>Customers</h2>
                     </div>
@@ -175,5 +175,17 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
         // item.addEventListener('mouseover',activeLink))
     </script>
 </body>
+<style>
+    .info-container {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .imgBx img {
+        max-width: 100px;
+        /* set the maximum width to 100 pixels */
+    }
+</style>
 
 </html>

@@ -79,74 +79,105 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
         <div class="main-admin">
             <div class="topbar">
                 <div class="toggle">
-                    <i class="fa-solid fa-house"> </i>
+                    <i class="fa-solid fa-house"></i>
                 </div>
-
+                <div class="search">
+                    <label for="">
+                        <input type="text" placeholder="Search Here">
+                    </label>
+                </div>
                 <div class="user">
                     <img src="images/gold.jpg" alt="">
                 </div>
             </div>
 
+            <div class="cart-container  small-container">
+                <h2 class="cart-title">My Product Cart
+                    <div class="line"></div>
+
+                </h2>
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>SubTotal</th>
+                    </tr>
+                    <tr class="removeMe">
+                        <td>
+                            <div class="cart-info">
+                                <img src="images/bottle1.1.jpg" alt="">
+                                <div>
+                                    <p> 100ml Jar</p>
+                                    <small>#50000.00</small>
+                                    <a href="#" onclick="gerrout()">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" value="1">
+                        </td>
+                        <td>
+                            #5000.00
+                        </td>
+                    </tr>
+                    <tr class="removeMe">
+                        <td>
+                            <div class="cart-info">
+                                <img src="images/bottle1.1.jpg" alt="">
+                                <div>
+                                    <p> 100ml Jar</p>
+                                    <small>#50000.00</small>
+                                    <a href="#" onclick="gerrout()">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" value="1">
+                        </td>
+                        <td>
+                            #5000.00
+                        </td>
+                    </tr>
+                    <tr class="removeMe">
+                        <td>
+                            <div class="cart-info">
+                                <img src="images/bottle1.1.jpg" alt="">
+                                <div>
+                                    <p> 100ml Jar</p>
+                                    <small>#50000.00</small>
+                                    <a href="#" onclick="gerrout()">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" value="1">
+                        </td>
+                        <td>
+                            #5000.00
+                        </td>
+                    </tr>
+                    <tr class="removeMe">
+                        <td>
+                            <div class="cart-info">
+                                <img src="images/bottle1.1.jpg" alt="">
+                                <div>
+                                    <p> 100ml Jar</p>
+                                    <small>#50000.00</small>
+                                    <a href="#" onclick="gerrout()">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="number" value="1">
+                        </td>
+                        <td>
+                            #5000.00
+                        </td>
+                    </tr>
+                </table>
 
 
-            <!-- order  details -->
-            <div class="info-container">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Orders</h2>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Customer Name</td>
-                                <td>Phone Number</td>
-                                <td>Refrence</td>
-                                <td>Email</td>
-                                <td>Amount</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Loop through the products and display each one
-
-                            $sql = "SELECT reference,MAX(customer_name) AS customer_name,MAX(customer_phone) AS customer_phone,MAX(customer_email) AS customer_email, MAX(product_price) AS product_price, MAX(order_status) AS order_status
-                        FROM 
-                            orders 
-                        GROUP BY 
-                            reference
-                        LIMIT 7";
-                            $result = mysqli_query($mysqli, $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($order = mysqli_fetch_assoc($result)) {
-                                    $refrence = $order['reference'];
-                                    $name = $order['customer_name'];
-                                    $amount = $order['product_price'];
-                                    $status = $order['order_status'];
-                                    $number = $order['customer_phone'];
-                                    $email = $order['customer_email'];
-                            ?>
-                                    <tr>
-                                        <td><?php echo $name; ?></td>
-                                        <td><?php echo $number; ?></td>
-                                        <td><a href="order-details.php?reference=<?php echo $refrence; ?>"><?php echo $refrence; ?></a></td>
-                                        <td><?php echo $email ?></td>
-                                        <td><?php echo $amount ?></td>
-                                        <td>
-                                            <span class="status <?php echo $status ?>"><?php echo $status ?></span>
-                                        </td>
-
-                                    </tr>
-                            <?php
-                                }
-                            } else {
-                                echo "No products found";
-                            }
-                            // Close the connection
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                <a href="" class="btn cart-btn">Add New Product</a>
             </div>
         </div>
     </div>
@@ -172,12 +203,5 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
         // item.addEventListener('mouseover',activeLink))
     </script>
 </body>
-<style>
-    .info-container {
-        margin: 20px;
-        padding: 20px;
-        border: 1px solid #ddd;
-    }
-</style>
 
 </html>

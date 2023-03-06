@@ -20,10 +20,10 @@ if ($transaction->data->status == 'success') {
 }
 
 require_once 'conn.php';
-$Email = $_SESSION["Email"];
+$id = $_SESSION["id"];
 
 // Insert the order details into the database
-$sql = "UPDATE orders SET reference ='$ref', order_status = '$status' WHERE customer_email = '$Email' ";
+$sql = "UPDATE orders SET reference ='$ref', order_status = '$status' WHERE user_id = '$id' ";
 $result = mysqli_query($mysqli, $sql);
 if ($result) {
     echo "Record updated successfully";

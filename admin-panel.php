@@ -62,7 +62,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="add-products.php">
                         <!-- <span  class="icon"><i class="fa-solid fa-sparkles"></i></span> -->
                         <span class="title"><i class="fa-solid fa-house"></i>Add Products</span>
                     </a>
@@ -153,7 +153,12 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                             <?php
                             // Loop through the products and display each one
 
-                            $sql = "SELECT * FROM orders LIMIT 7";
+                            $sql = "SELECT reference,MAX(customer_name) AS customer_name,MAX(customer_phone) AS customer_phone,MAX(customer_email) AS customer_email, MAX(product_price) AS product_price, MAX(order_status) AS order_status
+                        FROM 
+                            orders 
+                        GROUP BY 
+                            reference
+                        LIMIT 7";
                             $result = mysqli_query($mysqli, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($order = mysqli_fetch_assoc($result)) {
@@ -161,14 +166,13 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
                                     $name = $order['customer_name'];
                                     $amount = $order['product_price'];
                                     $status = $order['order_status'];
-                                    $suc = 'delivered';
                                     $number = $order['customer_phone'];
                                     $email = $order['customer_email'];
                             ?>
                                     <tr>
                                         <td><?php echo $name; ?></td>
                                         <td><?php echo $number; ?></td>
-                                        <td><?php echo $refrence ?></td>
+                                        <td><a href="order-details.php?reference=<?php echo $refrence; ?>"><?php echo $refrence; ?></a></td>
                                         <td><?php echo $email ?></td>
                                         <td><?php echo $amount ?></td>
                                         <td>

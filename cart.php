@@ -57,14 +57,14 @@ if (!isset($_SESSION['cart'])) {
 
 
 
-        <div class="cart-container  small-container">
+        <div class="cart-container ">
             <h2 class="cart-title">My Product Cart
                 <div class="line"></div>
 
             </h2>
 
 
-            <form method="POST" action="save_cart.php">
+            <form method="POST" id="myForm" action="actions.php">
                 <table>
                     <thead>
                         <tr>
@@ -90,6 +90,8 @@ if (!isset($_SESSION['cart'])) {
                             $sql = "SELECT * FROM products WHERE id IN (" . implode(',', $_SESSION['cart']) . ")";
                             $query = $mysqli->query($sql);
                             while ($row = $query->fetch_assoc()) {
+
+                                $id = $row['id'];
                         ?>
                                 <tr>
 
@@ -101,6 +103,7 @@ if (!isset($_SESSION['cart'])) {
                                     <td style="margin:40px;"><?php echo $row['sizes'];
                                                                 'ml' ?></td>
                                     <td><?php echo number_format($row['product_Price'], 2); ?></td>
+                                    <input type="hidden" name="qty_array[]" value="<?php echo $_SESSION['qty_array'][$index]; ?>">
                                     <input type="hidden" name="indexes[]" value="<?php echo $index; ?>">
                                     <td><input style="background-color: transparent; border:none; text-decoration:underline;" type="number" min="1" max="10" class="form-control" value="<?php echo $_SESSION['qty_array'][$index]; ?>" id="quantity" name="qty_<?php echo $index;  ?>"></td>
                                     <td><?php echo number_format($_SESSION['qty_array'][$index] * $row['product_Price'], 2); ?></td>
@@ -123,25 +126,31 @@ if (!isset($_SESSION['cart'])) {
                         $Subtotal = 500 + $total;
                         $Delivery = 500;
                         ?>
-                        <tr>
-                            <td colspan="4" align="right"><b>Total</b></td>
-                            <td><b><?php echo number_format($total, 2); ?></b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="right"><b>Delivery Fee</b></td>
-                            <td><b><?php echo number_format($Delivery, 2);; ?></b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="right"><b>Subtotal</b></td>
-                            <td><b><?php echo number_format($Subtotal, 2); ?></b></td>
-                        </tr>
+                        <div class="numbers">
+                            <tr>
+                                <td colspan="4" align="right"><b>Total</b></td>
+                                <td><b><?php echo number_format($total, 2); ?></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><b>Delivery Fee</b></td>
+                                <td><b><?php echo number_format($Delivery, 2);; ?></b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="right"><b>Subtotal</b></td>
+                                <td><b><?php echo number_format($Subtotal, 2); ?></b></td>
+                            </tr>
+                        </div>
                     </tbody>
 
                 </table>
-                <a href="product.php" class="btn"> Back</a>
-                <a href="confirm_order.php" class="btn"> Confirm order</a>
-                <a href="clear_cart.php" class="btn"> Clear Cart</a>
-                <button type="submit" class="btn" name="save">Save Changes</button>
+                <div class="buttons">
+
+                    <a href="product.php" class="btn"> Back</a>
+                    <a href="confirm_order.php" class="btn"> Confirm order</a>
+                    <!-- <a href="clear_cart.php" class="btn"> </a> -->
+                    <button type="submit" class="btn" name="clear cart">Clear cart</button>
+                    <button type="submit" class="btn" name="save">Update subtotal</button>
+                </div>
             </form>
         </div>
 
@@ -185,6 +194,24 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <style>
+        .btn {
+            width: auto;
+
+        }
+
+        .buttons {
+            width: 100%;
+            margin: auto;
+        }
+
+
+
+        .info-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
         input {
             margin: 7px;
             padding: 2px;
@@ -233,6 +260,11 @@ if (!isset($_SESSION['cart'])) {
             myLilText.classList.toggle('active')
 
         }
+        document.getElementById("myForm").addEventListener("keydown", function(event) {
+            if (event.keyCode === 13) { // 13 is the code for the Enter key
+                event.preventDefault(); // prevent the form from submitting
+            }
+        });
     </script>
 </body>
 

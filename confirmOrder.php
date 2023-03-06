@@ -7,7 +7,7 @@ if (!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true) {
 }
 $total = isset($_SESSION['cart_total']) ? $_SESSION['cart_total'] : 0;
 
-$Email = $_SESSION["Email"];
+$id = $_SESSION["id"];
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ $Email = $_SESSION["Email"];
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="check.js"></script>
@@ -29,149 +29,222 @@ $Email = $_SESSION["Email"];
     <link href="index.html">
 
 </head>
+<?php
+$sql = "SELECT customer_email FROM orders WHERE user_id = $id";
+$result = mysqli_query($mysqli, $sql);
+$user = mysqli_fetch_assoc($result);
+if (mysqli_num_rows($result) > 0) {
+    $Email = $user['customer_email'];
+}
+?>
 
 <body>
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
+
+    <h1>Checkout page</h1>
+
+    <form method="post" action="">
+
+        <input type="text" name="name" id="name" placeholder="Insert your full name" required hidden><br>
+
+        <input type="text" name="phone" id="phone" placeholder="insert your phone number" required hidden><br>
+
+        <input type="email" value="<?php echo $Email; ?>" placeholder="insert your email address" name="email" id="email" hidden><br><br>
+
+
+        <input type="text" id="total_price" name="total_price" value="<?php echo $total; ?>" disabled hidden>
+
+
+        <a href="confirm_order.php" class="btn"> Back</a>
+        <button type="submit" onclick="payWithPaystack()">CLICK TO PROCEED WITH PAYMENT </button>
+    </form>
+
+
+
+    <div class="footer">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Talk To Us</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, labore. Voluptatibus cum fuga dolores reprehenderit odit optio. Voluptas ex sapiente animi commodi molestias ullam nihil saepe sunt dolore, et nostrum.</p>
+            </div>
+            <div class="footer-col-2">
                 <h1>LOGO</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, labore. Voluptatibus cum fuga dolores reprehenderit odit optio. Voluptas ex sapiente animi commodi molestias ullam nihil saepe sunt dolore, et nostrum.</p>
             </div>
-            <nav>
-                <ul id="MenuItems">
-                    <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
-                    <li><a href="product.php"><i class="fa-solid fa-jar"></i>Products</a></li>
-                    <li><a href="contact.php"><i class="fa-solid fa-phone"></i>Contact</a></li>
-                    <li><a href="logout.php"><i class="fa-solid fa-phone"></i>Logout</a></li>
-                    <li><a href="cart.php"><?php echo count($_SESSION['cart']); ?><i class="fa-solid fa-shopping-cart"></i></a></li>
+            <div class="footer-col-4">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Return Policy</li>
+                    <li>Terms and Conditions</li>
                 </ul>
-            </nav>
-            <div class="color-mode">
-                <div class="toggle">
-                    <div class="indicator"></div>
-                </div>
-
             </div>
-            <a href="account.php">
-                <i class="fa-solid fa-user  user"></i>
-            </a>
-            <i class="fa-solid fa-sparkles  user  menu-icon" onclick="menutoggle()"></i>
-        </div>
-
-
-
-        <div class="order-container">
-
-            <form method="post" action="">
-                <input type="email" name="email" value="<?php echo $Email ?>" id="email" hidden><br><br>
-
-                <input type="text" id="total_price" name="total_price" value="<?php echo $total; ?>" disabled hidden>
-
-                <input type="text" name="name" id="name" placeholder="Insert the name on the order" required hidden><br><br>
-
-                <input type="text" name="phone" id="phone" placeholder="insert the number for the order" required hidden><br>
-
-
-                <button onclick="payWithPaystack()">CLICK TO PROCEED WITH PAYMENT </button>
-            </form>
-        </div>
-
-
-        <div class="footer">
-            <div class="row">
-                <div class="footer-col-1">
-                    <h3>Talk To Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, labore. Voluptatibus cum fuga dolores reprehenderit odit optio. Voluptas ex sapiente animi commodi molestias ullam nihil saepe sunt dolore, et nostrum.</p>
-                </div>
-                <div class="footer-col-2">
-                    <h1>LOGO</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, labore. Voluptatibus cum fuga dolores reprehenderit odit optio. Voluptas ex sapiente animi commodi molestias ullam nihil saepe sunt dolore, et nostrum.</p>
-                </div>
-                <div class="footer-col-4">
-                    <h3>Useful Links</h3>
-                    <ul>
-                        <li>Return Policy</li>
-                        <li>Terms and Conditions</li>
-                    </ul>
-                </div>
-                <div class="footer-col-5">
-                    <h3>Follow Us</h3>
-                    <ul>
-                        <li> <i class="fa-solid fa-facebook"></i>
-                            Facebook</li>
-                        <li><i class="fa-solid fa-instagram"></i>Instagram</li>
-                        <li><i class="fa-solid fa-phone"></i>+234 809790555 </li>
-                        <li><i class="fa-solid fa-mail"></i>qpp@gmail.com</li>
-                    </ul>
-                </div>
-                <hr>
-                <p class="copyright">
-                    &copy;Yours Codedly &trade; 2023
-                    <br>Developed by Tech Leads Ms Blessed Ohuegbe and Mr Emelifonwu Williams
-                    <br>
-                    All Rights Reserved
-                </p>
+            <div class="footer-col-5">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li> <i class="f
+                        a-solid fa-facebook"></i>
+                        Facebook</li>
+                    <li><i class="fa-solid fa-instagram"></i>Instagram</li>
+                    <li><i class="fa-solid fa-phone"></i>+234 809790555 </li>
+                    <li><i class="fa-solid fa-mail"></i>qpp@gmail.com</li>
+                </ul>
             </div>
+            <hr>
+            <p class="copyright">
+                &copy;Yours Codedly &trade; 2023
+                <br>Developed by Tech Leads Ms Blessed Ohuegbe and Mr Emelifonwu Williams
+                <br>
+                All Rights Reserved
+            </p>
         </div>
     </div>
 
-    <style>
-        input {
-            margin: 7px;
-            padding: 2px;
-        }
 
-        table {
-            width: 100%;
-            padding: 400px;
-        }
-
-
-
-        .order-container {
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            color: black;
-            max-width: 1300px;
-            margin: auto;
-            padding-left: 20px;
-            padding-right: 20px;
-            width: 100vw;
-            height: 70%;
-            gap: 1rem;
-        }
-    </style>
-    <script>
-        var MenuItems = document.getElementById("MenuItems")
-        MenuItems.style.maxHeight = "0px"
-
-        function menutoggle() {
-            if (MenuItems.style.maxHeight == "0px") {
-                MenuItems.style.maxHeight = "200px"
-            } else {
-                MenuItems.style.maxHeight = "0px"
-            }
-        }
-    </script>
-
-    <script>
-        let toggle = document.querySelector('.toggle')
-        let background = document.querySelector('.container')
-        let myLilText = document.querySelector('.user')
-        let myContact = document.querySelector(' .my-contact')
-        let header = document.querySelector('.header')
-        let meet = document.querySelector('.meet')
-        let phone = document.querySelector('.phone')
-
-        toggle.onclick = function() {
-            toggle.classList.toggle('active')
-            background.classList.toggle('active')
-            myLilText.classList.toggle('active')
-
-        }
-    </script>
 </body>
 
 </html>
+<style>
+    /* Checkout page styles */
+
+    /* Header */
+    /* Checkout page styling */
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form button,
+    form a.btn {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        color: #333;
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form button {
+        width: 100%;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="tel"]:focus,
+    form button:focus,
+    form a.btn:focus {
+        outline: none;
+    }
+
+    form button {
+        cursor: pointer;
+        background-color: #0066ff;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    form a.btn {
+        cursor: pointer;
+        background-color: #ccc;
+        color: #333;
+        font-weight: bold;
+    }
+
+    /* Footer styling */
+
+    .footer {
+        background-color: #222;
+        color: #fff;
+        padding: 50px 0;
+    }
+
+    .footer h1,
+    .footer h3 {
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .footer p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .footer hr {
+        margin: 30px 0;
+        border: none;
+        height: 1px;
+        background-color: #555;
+    }
+
+    .footer-col-1,
+    .footer-col-2,
+    .footer-col-4,
+    .footer-col-5 {
+        width: 25%;
+        padding: 0 20px;
+    }
+
+    .footer-col-2 h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .footer-col-4 ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-col-4 ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col-5 ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-col-5 ul li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .footer-col-5 ul li i {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    @media (max-width: 992px) {
+
+        .footer-col-1,
+        .footer-col-2,
+        .footer-col-4,
+        .footer-col-5 {
+            width: 50%;
+            margin-bottom: 30px;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .footer-col-1,
+        .footer-col-2,
+        .footer-col-4,
+        .footer-col-5 {
+            width: 100%;
+        }
+    }
+</style>
